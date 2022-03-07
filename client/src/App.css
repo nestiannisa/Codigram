@@ -1,0 +1,109 @@
+:root {
+  --darkBlue-color: #201568;
+  --white-color: #ffff;
+}
+
+/*.logoLogin, .logoRegister{
+padding-left: 0px;
+margin-left: -70px;
+}*/
+
+.imageSearch{
+border-radius: 200px;
+}
+
+.NavDropdown{
+  color: #707070 !important;
+}
+
+.userPost{
+height: 500px;
+}
+
+.userPostImage{
+  height: 250px;
+}
+
+.date{
+  font-size: 13px;
+  color: #707070;
+}
+
+.PostAvatar{
+  height: 50px;
+  width: 50px;
+  border-radius: 35px;
+}
+
+.navbar{
+  background-color: var(--darkBlue-color);
+  color: var(--white-color) ;
+  padding: 0px;
+}
+
+.loginpage, .registerPage{
+background-color: var(--darkBlue-color);
+height: 350px;
+}
+
+.login, .register{
+  padding-top: 160px;
+}
+
+.loginForm, .registerForm, .formAdd, .formEditPost, .formEditUser{
+  background-color: #F5F5FC;
+  min-width: 300px;
+  min-height: 400px;
+  border-radius: 15px;
+  color: #707070;
+  box-shadow: 1px 3px 10px #b9b8b8;
+  font-family:'Segoe UI';
+  text-align: center;
+}
+
+/*.loginForm, .registerForm {
+  background-color: #F5F5FC;
+  min-width: 700px;
+  min-height: 400px;
+  border-radius: 15px;
+  color: #707070;
+  box-shadow: 1px 3px 10px #b9b8b8;
+  font-family:'Segoe UI';
+  text-align: center;
+}*/
+
+.loginForm h4, .registerForm h4, .formAdd h5, .formEditPost h5, .formEditUser h5{
+  color: var(--darkBlue-color);
+  font-family:'Lora';
+  font-weight: 700;
+  text-align: center;
+}
+
+.accountUsername{
+  font-family:'Lora';
+  font-size: 50px;
+  color: var(--darkBlue-color);
+}
+
+.accountImage{
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+}
+
+.cardAccount{
+  border: none;
+}
+
+.content, .postUser, .postCaption, .postComment{
+  font-family: 'Fredoka';
+}
+
+.navbarCod{
+  font-family: 'Ubuntu Mono';
+}
+
+.navCom{
+  font-family: 'EB Garamond';
+  color: var(--white-color);
+}
