@@ -21,6 +21,7 @@ export const register = (data) => {
         loading: true,
         data: false,
         errorMessage: false,
+        isRefresh: false
       },
     });
     //get api
@@ -72,6 +73,8 @@ export const login = (data) => {
         data: false,
         errorMessage: false,
         isLogin: false,
+        isRefresh: false
+
       },
     });
     
@@ -84,7 +87,7 @@ export const login = (data) => {
       data: data,
     })
       .then((token) => {
-        Swal.fire("Good job!", "You have Login", "success");
+//        Swal.fire("Good job!", "You have Login", "success");
         console.log("3.berhasil", token.data);
         localStorage.setItem(
           "token_for_access",
@@ -98,6 +101,7 @@ export const login = (data) => {
             data: token.data,
             errorMessage: false,
             isLogin: true,
+        isRefresh: true
           },
         });
       })

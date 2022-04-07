@@ -107,3 +107,8 @@ height: 350px;
   font-family: 'EB Garamond';
   color: var(--white-color);
 }
+
+.buttonPop{
+  border: none;
+  background-color: transparent;
+}

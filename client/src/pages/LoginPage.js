@@ -11,14 +11,18 @@ function LoginPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+const [refresh, setRefresh] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("1.masuk handle submit");
     //add user
     navigate("/");
+    setRefresh(true)
+    window.location.reload();
     dispatch(login({ username: username, password: password, isLogin: true }));
   };
+  console.log(refresh)
   return (
     <div className="loginpage">
       <Row className="justify-content-center  login">

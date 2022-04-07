@@ -25,7 +25,7 @@ function AccountPage() {
           <Row className="justify-content-md-center pt-5">
             <Card className="mt-3 cardAccount">
               <Row>
-                <Col md={2}>
+                <Col sm={1} md={2} lg={3}>
                   <Card.Img
                     className=" accountImage mt-3 mb-3"
                     variant="top"
@@ -35,12 +35,12 @@ function AccountPage() {
                 <Col>
                   <Card.Body>
                     <Row>
-                      <Col lg={2}>
+                      <Col >
                         <Card.Title className="accountUsername">
                           {userAccountResult.username}
                         </Card.Title>
                       </Col>
-                      <Col>
+                      <Col xxs={1} xs={1} sm={1} md={2} lg={1}>
                         <Link to={`/account/edit`}>
                         <FiEdit/>
                         </Link>

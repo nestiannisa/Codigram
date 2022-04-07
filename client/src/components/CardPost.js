@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PostsList } from "../Action/postAction";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Card, Row, Col } from "react-bootstrap";
-import { API_URL } from "../utils/constant";
+import { Card, Row, Col, Spinner} from "react-bootstrap";
+import { API_URL, login } from "../utils/constant";
 import { timeSince } from "../utils/time";
 
 function CardPost() {
@@ -11,6 +11,17 @@ function CardPost() {
     (state) => state.posts
   );
 
+  const { userAccountResult, userAccountLoading, userAccountError } =
+    useSelector((state) => state.users);
+
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+  const ref = useRef(null);
+
+  const handleClick = (event) => {
+    setShow(!show);
+    setTarget(event.target);
+  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +33,7 @@ function CardPost() {
   return (
     <>
       {listPostResult ? (
-        listPostResult.map((post,i) => {
+        listPostResult.map((post, i) => {
           return (
             <Row key={i} className="justify-content-center">
               <Card style={{ width: "50rem" }} className="mt-3">
@@ -44,23 +55,26 @@ function CardPost() {
                     </small>
                   </Col>
                 </Row>
-                <Card.Img
-                  className="userPost mt-3"
-                  variant="top"
-                  src={`${API_URL}/${post.image}`}
-                />
+                <Link to={`/posts/detail/${post.id}`}>
+                  <Card.Img
+                    className="userPost mt-3"
+                    variant="top"
+                    src={`${API_URL}/${post.image}`}
+                  />
+                </Link>
                 <Card.Body>
                   <Card.Text className="postCaption">{post.caption}</Card.Text>
-                  <Link to={`/posts/detail/${post.id}`}>
-                    <small>...</small>
-                  </Link>
                 </Card.Body>
               </Card>
             </Row>
           );
         })
       ) : listPostLoading ? (
-        <p>loading</p>
+        <div div className=" text-center mt-5">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
       ) : (
         <p>{listPostError ? listPostError : "data kosong"}</p>
       )}

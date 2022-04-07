@@ -16,6 +16,8 @@ function NavbarComponents() {
     //userLogin(false);
     localStorage.clear();
     navigate("/");
+    window.location.reload();
+    
   };
 
   const { userAccountResult, userAccountLoading, userAccountError } =

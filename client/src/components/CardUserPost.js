@@ -1,23 +1,27 @@
-import React, { useEffect } from "react";
-import { Card, Col, Dropdown, Row } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import { Card, Col, Dropdown, Row, Popover, Overlay } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { API_URL, token_for_access } from "../utils/constant";
+import { API_URL } from "../utils/constant";
 import { timeSince } from "../utils/time";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost, postUser } from "../Action/postAction";
 import { FiEdit, FiDelete } from "react-icons/fi";
 import Swal from "sweetalert2";
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 function CardUserPost() {
   const { userPostResult, userPostLoading, userPostError } = useSelector(
     (state) => state.posts
   );
 
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+  const ref = useRef(null);
   const dispatch = useDispatch();
-
+  const handleClick = (event) => {
+    setShow(!show);
+    setTarget(event.target);
+  };
   useEffect(() => {
     //panggil action post list
     console.log("1.use");
@@ -61,32 +65,54 @@ function CardUserPost() {
                   src={`${API_URL}/${post.image}`}
                 />
                 <Card.Body>
-                  <Card.Text>{post.caption}</Card.Text>
+                  <Row>
+                    <Col>
+                      <Card.Text>{post.caption}</Card.Text>
+                    </Col>
+                    <Col xxs={1} xs={1} sm={1} md={2} lg={1}>
+                      <div ref={ref}>
+                        <button className="buttonPop" onClick={handleClick}>
+                          {" "}
+                          <BsThreeDotsVertical />{" "}
+                        </button>
+
+                        <Overlay
+                          show={show}
+                          target={target}
+                          placement="left"
+                          container={ref}
+                          containerPadding={20}
+                        >
+                          <Popover id="popover-contained">
+                            <Popover.Body>
+                              <div>
+                                <Link to={`/account/posts/edit/${post.id}`}>
+                                  <p  className="mx-3">
+                                    <FiEdit className="mx-3"/> Edit
+                                  </p>
+                                </Link>
+                                <a
+                                  href=""
+                                  variant="danger"
+                                  onClick={(e) => handleDelete(e, post.id)}
+                                >
+                                  <p className="mx-3">
+                                    {" "}
+                                    <FiDelete className="mx-3" /> Delete
+                                  </p>
+                                </a>
+                              </div>
+                            </Popover.Body>
+                          </Popover>
+                        </Overlay>
+                      </div>
+                    </Col>
+                  </Row>
                   <Row>
                     <small className=" date mb-3">
                       {timeSince(post.createdAt)}
                     </small>
                   </Row>
-
-                  <Dropdown drop="up" alignRight>
-                    <DropdownToggle></DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>
-                        <Link to={`/account/posts/edit/${post.id}`}>
-                          <FiEdit />
-                        </Link>
-                      </DropdownItem>
-                      <DropdownItem>
-                        <a
-                          href=""
-                          variant="danger"
-                          onClick={(e) => handleDelete(e, post.id)}
-                        >
-                          <FiDelete />
-                        </a>
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
                 </Card.Body>
               </Card>
             </Col>
