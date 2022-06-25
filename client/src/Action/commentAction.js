@@ -1,12 +1,11 @@
 import axios from "axios";
 import { API_URL, token_for_access } from "../utils/constant";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export const COMMENT_ID = "COMMENT_ID";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
-
 
 export const commentById = (PostId) => {
   console.log("2. comment");
@@ -24,7 +23,7 @@ export const commentById = (PostId) => {
     axios({
       method: "GET",
       url: `${API_URL}/comments/${PostId}`,
-      timeout: 120000
+      timeout: 120000,
     })
       .then((response) => {
         console.log("3.berhasil comment", response.data);
@@ -51,7 +50,7 @@ export const commentById = (PostId) => {
   };
 };
 
-export const addComment = (id,data) => {
+export const addComment = (id, data) => {
   console.log("2. comment add");
   return (dispatch) => {
     //loading
@@ -69,7 +68,8 @@ export const addComment = (id,data) => {
       url: `${API_URL}/comments/add/${id}`,
       timeout: 120000,
       headers: { token_for_access },
-      data: id,data
+      data: id,
+      data,
     })
       .then((response) => {
         Swal.fire("Good job!", "Your comment has been add!", "success");
@@ -120,7 +120,7 @@ export const deleteComment = (id) => {
       method: "DELETE",
       url: `${API_URL}/comments/delete/${id}`,
       timeout: 120000,
-      headers: {token_for_access}
+      headers: { token_for_access },
     })
       .then((response) => {
         console.log("3.berhasil delete comment", response.data);
@@ -165,8 +165,8 @@ export const editComment = (id, data) => {
       method: "PUT",
       url: `${API_URL}/comments/update/${id}`,
       timeout: 120000,
-      headers: {token_for_access},
-      data:data
+      headers: { token_for_access },
+      data: data,
     })
       .then((response) => {
         console.log("3.berhasil update comment", response.data);
